@@ -9,7 +9,8 @@ def start():
     user = Player("Player", 0, 0, False)
     dealer = Player("Dealer", 0, 0, False)
     roll_result = 0
-    print(highscores)
+    user.highscore = int (highscores[0])
+    dealer.highscore = int(highscores[1])
     while True:
         if stop == False and user.isBust == False:
             print(f"-- Current Highscores -- \nPlayer:{user.highscore}\nDealer: {dealer.highscore}")
@@ -107,6 +108,9 @@ def start():
                 print("starting a new round")
             elif choice == 2:
                 print("Exiting game")
+                highscores.clear()
+                highscores.append(user.highscore)
+                highscores.append(dealer.highscore)
                 game.save_file(file_name, highscores)
                 break
             
