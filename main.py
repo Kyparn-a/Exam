@@ -9,8 +9,9 @@ def start():
     user = Player("Player", 0, 0, False)
     dealer = Player("Dealer", 0, 0, False)
     roll_result = 0
-    user.highscore = int (highscores[0])
-    dealer.highscore = int(highscores[1])
+    if len(highscores) > 0:
+        user.highscore = int (highscores[0])
+        dealer.highscore = int(highscores[1])
     print(f"-- Current Highscores -- \nPlayer:{user.highscore}\nDealer: {dealer.highscore}")
     while True:
         if stop == False and user.isBust == False:
