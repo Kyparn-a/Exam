@@ -53,7 +53,8 @@ class Game:
         print("1. Roll again")
         print("2. Stop ")
 
-    def playagain_menu(self):
+    def playagain_menu(self,user,dealer):
+        print(f"-- Current Highscores -- \nPlayer:{user.highscore}\nDealer: {dealer.highscore}")
         print("1. Yes")
         print("2. No")
     
@@ -85,7 +86,6 @@ class Game:
             user.increaseHighscore(1)
             dealer.resetHighscore()
         elif result < 0 and dealer.isBust == False:
-            print("WIN TEST", user.displayResult())
             print(" Dealer Wins!")
             dealer.increaseHighscore(1)
             user.resetHighscore()

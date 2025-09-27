@@ -23,14 +23,14 @@ def test_should_display_menu (capsys): # För att kolla att UI elementen visas f
     assert "1. Roll the dice" in captured.out
     assert "2. Stop rolling" in captured.out
     
-def test_should_bust_player(): # Testa att spelaren förlorar om den går över 21 så att spelet inte kan fortsätta om spelaren redan förlorat
+def test_should_bust_player(): # Testa så att spelarens score kan gå över 21 och att spelaren förlorar om den går över 21 så att spelet inte kan fortsätta om spelaren redan förlorat
     player = Player("Player", 0, 0, False)
     player.increaseScore(22)
     assert player.points == 22
     assert player.isBust == True
 
-def test_should_Draw(capsys): # Testa för att kolla om det blir oavgjort när spelaren och dealern har samma värde
-    player = Player("Player", 0, 0, False)
+def test_should_Draw(capsys): # Test för att kolla om det blir oavgjort när spelaren och dealern har samma värde och att highscore inte uppdateras när det blir oavgjort
+    player = Player("Player", 1, 0, False)
     dealer = Player("Dealer", 0, 0, False)
     game = Game("highscores.txt", 2, False, 0)
     player.increaseScore(21)
@@ -40,6 +40,8 @@ def test_should_Draw(capsys): # Testa för att kolla om det blir oavgjort när s
     assert player.points == 21
     assert dealer.points == 21
     assert "Draw!" in captured.out
+    assert dealer.highscore == 0
+    assert player.highscore == 1
        
         
         

@@ -11,9 +11,10 @@ def start():
     roll_result = 0
     user.highscore = int (highscores[0])
     dealer.highscore = int(highscores[1])
+    print(f"-- Current Highscores -- \nPlayer:{user.highscore}\nDealer: {dealer.highscore}")
     while True:
         if stop == False and user.isBust == False:
-            print(f"-- Current Highscores -- \nPlayer:{user.highscore}\nDealer: {dealer.highscore}")
+            
             game.play_menu()
             try:
                 choice = int(input("Choose an option1 (1-2): "))
@@ -72,9 +73,9 @@ def start():
                 
         elif user.isBust == True:
             print("You lost")
-            game.playagain_menu()
             dealer.increaseHighscore(1)
             user.resetHighscore()
+            game.playagain_menu(user, dealer)
             user.newRound()
             dealer.newRound()
             try:
@@ -90,13 +91,12 @@ def start():
                 print("Exiting game")
                 break
         else:
-            print(user.displayResult())
             game.roundEnd(user,dealer)
             
             stop=False
             user.newRound()
             dealer.newRound()
-            game.playagain_menu()
+            game.playagain_menu(user, dealer)
             try:
                 choice = int(input("Do you want to play again? (1-2): "))
                 if choice > 2 or choice <= 0:
@@ -113,6 +113,7 @@ def start():
                 highscores.append(dealer.highscore)
                 game.save_file(file_name, highscores)
                 break
+    
             
     
 print(f"__name__ {__name__}")
